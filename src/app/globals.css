@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+    --color-main: #12BDB6;
+    --color-nav-btn: #008B85;
+    --color-body: #D0EBEA;
+    --color-arrow-slide: #687575;
+}
+
+.container{
+    max-width: 1200px;
+    margin: 0px auto;
+}
+
+
