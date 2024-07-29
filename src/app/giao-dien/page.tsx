@@ -7,13 +7,13 @@ import { useSearchParams } from "next/navigation";
 import { Nganh } from "@/util/type";
 import LoadingCss from "@/components/loading/LoadingCss";
 import Footer from "@/components/footer/Footer";
+import SelectMenu from "@/components/select/SelectMenu";
 
 
 type data = {
   id: number;
   name: string;
 }
-
 
 export default function Giaodien() {
 
@@ -23,22 +23,33 @@ export default function Giaodien() {
   const [isLoading, setLoading] = useState(true)
 
 
+  // useEffect(() => {
+  //   callAllNganh();
+  // }, [params]);
+
+  // const callAllNganh = async () => {
+  //   const res = await fetch(`${process.env.URL_BACKEND}/api/v1/nganh`);
+  //   const result = await res.json();
+  //   if (result.EC === 1) {
+  //     setLoading(false)
+  //     setList(result.data);
+  //     findIdNganh(result.data);
+  //   }
+  // };
+
   useEffect(() => {
-    callAllNganh();
+    callAllNganh_parentId();
   }, [params]);
 
-  const callAllNganh = async () => {
-    const res = await fetch(`${process.env.URL_BACKEND}/api/v1/nganh`);
+  const callAllNganh_parentId = async () => {
+    const res = await fetch(`${process.env.URL_BACKEND}/api/v1/nganh_parent`);
     const result = await res.json();
     if (result.EC === 1) {
       setLoading(false)
       setList(result.data);
       findIdNganh(result.data);
     }
-
   };
-
-
   // find id, name nganh from list
   const findIdNganh = (arr: Nganh[]) => {
 
@@ -60,9 +71,15 @@ export default function Giaodien() {
             <SlideNganh list={list} />
             {
               slugNganh && slugNganh.name ?
-                <div className="mt-10 px-4 py-1 capitalize rounded bg-blue-600 w-fit mx-auto text-white text-xl font-semibold">{slugNganh.name}</div>
+                <div className="sm:flex block mt-10 items-center relative">
+                  <div className=" px-6 py-1 uppercase rounded bg-blue-600 w-fit mx-auto text-white text-lg font-semibold">{slugNganh.name}</div>
+                  <div className="text-end w-fit mt-5 sm:mt-0 sm:absolute right-0 top-0">
+                    <SelectMenu list={list}/>
+                  </div>
+
+                </div>
                 :
-                <div className="mt-10 px-4 py-1 capitalize rounded bg-blue-600 w-fit mx-auto text-white text-xl font-semibold">Tất cả</div>
+                <div className="mt-10 px-6 py-1 uppercase rounded bg-blue-600 w-fit mx-auto text-white text-lg font-semibold">Tất cả</div>
 
             }
 

@@ -2,16 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
-:root{
-    --color-main: #12BDB6;
-    --color-nav-btn: #008B85;
-    --color-body: #D0EBEA;
-    --color-arrow-slide: #687575;
+:root {
+  --color-main: #12bdb6;
+  --color-nav-btn: #008b85;
+  --color-body: #d0ebea;
+  --color-arrow-slide: #bdc3c7;
 }
 
-.container{
-    max-width: 1200px;
-    margin: 0px auto;
+.container {
+  max-width: 1200px;
+  margin: 0px auto;
 }
 
+@font-face {
+  font-family: "UTM Evo";
+  src: url("/fonts/UTM Avo.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
 
+body {
+  font-family: "UTM Evo", sans-serif;
+}

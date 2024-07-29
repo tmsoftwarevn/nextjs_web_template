@@ -26,22 +26,45 @@ const QuanliNganh = () => {
   const [isModalUpdateNganh, setIsModalUpdateNganh] = useState(false);
 
   const [loading, setLoading] = useState(true);
+  const [listCustomParent, setListCustomParent] = useState([]);
 
   useEffect(() => {
     fetchAllNganh();
+    fetchAllNganh_customParent();
   }, []);
 
   const fetchAllNganh = async () => {
-  
     const res = await fetch(`${process.env.URL_BACKEND}/api/v1/nganh`);
     const result = await res.json();
     customNganh(result.data);
+  };
 
+  const fetchAllNganh_customParent = async () => {
+    const res = await fetch(`${process.env.URL_BACKEND}/api/v1/nganh_parent`);
+    const result = await res.json();
+    if (result.EC === 1) customSelectParent(result.data);
+  };
+
+  const customSelectParent = (list) => {
+    let arr = [
+      {
+        value: "0",
+        label: "Không có",
+      },
+    ];
+    list.map((item, idx) => {
+      arr.push({
+        value: item.id,
+        label: item.name,
+      });
+    });
+    setListCustomParent(arr);
   };
 
   const confirm = async (id) => {
-    const data = await fetch(`${process.env.URL_BACKEND}/api/v1/nganh/${id}`, { // Replace with your endpoint
-      method: 'DELETE',
+    const data = await fetch(`${process.env.URL_BACKEND}/api/v1/nganh/${id}`, {
+      // Replace with your endpoint
+      method: "DELETE",
     });
     const res = await data.json();
     if (res && res.EC === 1) {
@@ -64,13 +87,12 @@ const QuanliNganh = () => {
         action: index,
         image: item.image,
         title: item.title,
-        meta_des: item.meta_des
+        meta_des: item.meta_des,
+        parentId: item.parentId,
       });
     });
 
     setListNganh(arr);
-    //setLoading(false);
-
   };
   const handleUpdateNganh = (record) => {
     setIsModalUpdateNganh(true);
@@ -95,9 +117,30 @@ const QuanliNganh = () => {
       render: (text, record, index) => {
         return (
           <div>
-            <Image alt="dsf" src={`${process.env.URL_BACKEND}/images/${record?.image}`} width={100} height={100} />
+            <Image
+              alt="dsf"
+              src={`${process.env.URL_BACKEND}/images/${record?.image}`}
+              width={100}
+              height={100}
+            />
           </div>
         );
+      },
+    },
+    {
+      title: "Ngành cha",
+      dataIndex: "parentId",
+      key: "parentId",
+      sorter: {
+        compare: (a, b) => a.parentId - b.parentId,
+      },
+      render: (text, record, index) => {
+        // lấy cái name ngành
+        let obj =
+          listNganh &&
+          listNganh.find((item, idx) => +item.id === +record.parentId);
+        if (obj?.name) return <div>{obj?.name}</div>;
+        return <></>;
       },
     },
     {
@@ -160,10 +203,6 @@ const QuanliNganh = () => {
     },
   ];
 
-  // if (loading) {
-  //   return <div>Loading...</div>;
-  // }
-
   return (
     <>
       <Flex justify="flex-end">
@@ -189,12 +228,15 @@ const QuanliNganh = () => {
         isModalUpdateNganh={isModalUpdateNganh}
         setIsModalUpdateNganh={setIsModalUpdateNganh}
         dataUpdate={dataUpdate}
-        fetchAllNganh = {fetchAllNganh}
+        fetchAllNganh={fetchAllNganh}
+        listCustomParent={listCustomParent}
+        fetchAllNganh_customParent = {fetchAllNganh_customParent}
       />
       <AddNganh
         isModalAddNganh={isModalAddNganh}
         setIsModalAddNganh={setIsModalAddNganh}
-        fetchAllNganh = {fetchAllNganh}
+        fetchAllNganh={fetchAllNganh}
+        listCustomParent={listCustomParent}
       />
     </>
   );

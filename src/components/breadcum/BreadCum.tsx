@@ -14,10 +14,10 @@ export default function BasicBreadcrumbs({ nameNganh }: any) {
     return (
         <div role="presentation" onClick={handleClick}>
             <Breadcrumbs aria-label="breadcrumb" >
-                <Link className='xs:text-xs text-sm hover:text-blue-600' href="/">
+                <Link className='xs:text-xs text-md hover:text-blue-600' href="/">
                     TRANG CHỦ
                 </Link>
-                <Link className='xs:text-xs text-sm hover:text-blue-600 uppercase' href={{
+                <Link className='xs:text-xs text-md hover:text-blue-600 uppercase' href={{
                     pathname: '/giao-dien',
                     query: {
                        nganh: nameNganh.slug

@@ -1,10 +1,18 @@
 import Image from "next/image";
 import BasicBreadcrumbs from "../breadcum/BreadCum";
+import { useRouter } from "next/navigation";
 
-const Grid = ({detail, nameNganh} : any) => {
+const Grid = ({ detail, nameNganh }: any) => {
+    const route = useRouter();
 
     return (
         <>
+            <h2 className="text-2xl cursor-pointer font-semibold text-blue-600 text-center mb-10"
+                onClick={() => route.push('/giao-dien?nganh=all&page=1')}
+            >
+                TRANG CHỦ KHO GIAO DIỆN
+            </h2>
+
             <div className="grid xs:grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="grid-col-1">
                     <Image
@@ -18,13 +26,13 @@ const Grid = ({detail, nameNganh} : any) => {
                 </div>
                 <div className="grid-col-1">
 
-                    <BasicBreadcrumbs nameNganh ={nameNganh}/>
+                    <BasicBreadcrumbs nameNganh={nameNganh} />
                     <h1 className="mt-2 text-2xl md:text-3xl font-semibold text-blue-600">
-                       {detail.title}
+                        {detail.title}
                     </h1>
 
                     <div className="rounded-full w-fit cursor-pointer hover:bg-blue-700 mt-5 text-white font-semibold bg-blue-600 px-10 py-2"
-                     onClick={() =>  window.open(detail.link, '_blank', 'noopener,noreferrer')}
+                        onClick={() => window.open(detail.link, '_blank', 'noopener,noreferrer')}
                     >
                         XEM TRANG WEB THỰC TẾ
                     </div>

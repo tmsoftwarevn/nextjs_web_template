@@ -9,6 +9,7 @@ import {
   Input,
   Modal,
   Row,
+  Select,
   Upload,
   message,
 } from "antd";
@@ -20,6 +21,8 @@ const UpdateNganh = (props) => {
     setIsModalUpdateNganh,
     dataUpdate,
     fetchAllNganh,
+    listCustomParent,
+    fetchAllNganh_customParent
   } = props;
 
   const [form] = Form.useForm();
@@ -79,17 +82,25 @@ const UpdateNganh = (props) => {
   };
 
   const onFinish = (values) => {
-    const { nameform } = values;
+    const { nameform, parentId } = values;
     const slug = convertSlug(nameform);
 
-    CallUpdateNganh(nameform, slug, fileName, "t", "t");
-
+    CallUpdateNganh(nameform, slug, parentId, fileName, "t", "t");
+    
+    fetchAllNganh_customParent()
     form.resetFields();
     setIsModalUpdateNganh(false);
     setFileList([]);
   };
 
-  const CallUpdateNganh = async (name, slug, image, title, meta_des) => {
+  const CallUpdateNganh = async (
+    name,
+    slug,
+    parentId,
+    image,
+    title,
+    meta_des
+  ) => {
     const res = await fetch(
       `${process.env.URL_BACKEND}/api/v1/nganh/${dataUpdate?.id}`,
       {
@@ -97,7 +108,7 @@ const UpdateNganh = (props) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name, slug, image, title, meta_des }),
+        body: JSON.stringify({ name, slug,parentId, image, title, meta_des }),
       }
     );
 
@@ -143,7 +154,22 @@ const UpdateNganh = (props) => {
               </Form.Item>
             </Col>
 
-
+            <Col span={24}>
+              <Form.Item
+                labelCol={{ span: 24 }}
+                label="Ngành cha "
+                name="parentId"
+                initialValue={dataUpdate?.parentId}
+              >
+                <Select
+                  style={{
+                    width: "100%",
+                  }}
+                  placeholder="Ngành cha"
+                  options={listCustomParent}
+                />
+              </Form.Item>
+            </Col>
             {/* <Col span={24}>
               <Form.Item
                 labelCol={{ span: 24 }}
@@ -176,7 +202,6 @@ const UpdateNganh = (props) => {
                 <Input />
               </Form.Item>
             </Col> */}
-
 
             <Col span={24}>
               <Card title="Ảnh " bordered={true}>

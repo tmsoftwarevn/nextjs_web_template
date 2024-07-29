@@ -4,4 +4,5 @@ export interface Nganh {
     slug: string;
     image: string;
     id: number;
+    children: Nganh[];
 }

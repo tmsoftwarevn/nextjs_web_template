@@ -31,7 +31,7 @@ let settings = {
         {
             breakpoint: 576,
             settings: {
-                slidesToShow: 2,
+                slidesToShow: 3,
             },
         },
     ],
@@ -76,7 +76,7 @@ const SlideNganh: React.FC<ListNganh> = ({ list }) => {
             <h2 className="text-2xl cursor-pointer font-semibold text-blue-600 text-center mb-10"
                 onClick={() => route.push('/giao-dien?nganh=all&page=1')}
             >
-                KHO GIAO DIỆN CỦA TM SOFTWARE
+                TRANG CHỦ KHO GIAO DIỆN 
 
             </h2>
 
@@ -95,7 +95,7 @@ const SlideNganh: React.FC<ListNganh> = ({ list }) => {
                                         alt="fdsfd"
                                         className="mx-auto flex"
                                     />
-                                    <div className="mt-3 capitalize text-blue-600 text-center font-semibold text-basic">
+                                    <div className="mt-3 uppercase text-blue-600 text-center font-semibold text-sm">
                                         {item.name}
                                     </div>
                                 </div>
@@ -127,9 +127,10 @@ const SlideNganh: React.FC<ListNganh> = ({ list }) => {
                 />
                 <div
                     onClick={handleClickSearch}
-                    className='p-1 cursor-pointer bg-blue-600 rounded-full text-2xl'>
+                    className='p-1 cursor-pointer bg-blue-400 hover:bg-blue-500 rounded-full text-2xl'>
                     <GoSearch className='text-white' />
                 </div>
+                
             </div>
         </>
     );

@@ -1,38 +1,40 @@
-.arrow-left-tr{
+.arrow-left-tr {
     position: absolute;
-    left: 0;
+    left: -10px;
     top: 50%;
     transform: translateY(-50%);
     z-index: 50;
-    &__icon{
+    &__icon {
         font-size: 30px;
         padding: 1px;
         background-color: var(--color-arrow-slide);
         color: white;
         border-radius: 50%;
         font-weight: 900;
-        &:hover{
+        &:hover {
             opacity: 0.8;
+            background-color: #2980b9;
         }
     }
 }
 
 // toàn cục cho all slide
-.arrow-right-tr{
+.arrow-right-tr {
     position: absolute;
-    right: 0;
+    right: -10px;
     top: 50%;
     transform: translateY(-50%);
     z-index: 50;
-    &__icon{
+    &__icon {
         font-size: 30px;
         padding: 1px;
         background-color: var(--color-arrow-slide);
         color: white;
         border-radius: 50%;
         font-weight: 900;
-        &:hover{
+        &:hover {
             opacity: 0.8;
+            background-color: #2980b9;
         }
     }
 }

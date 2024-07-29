@@ -47,7 +47,7 @@ const RelatedProduct = ({ detail }: any) => {
     useEffect(() => {
         call_related_template();
     }, [detail]);
-  
+
     const call_related_template = async () => {
         const res = await fetch(
             `${process.env.URL_BACKEND}/api/v1/relate_template/${detail.id_nganh}`
@@ -60,7 +60,7 @@ const RelatedProduct = ({ detail }: any) => {
 
     return (
         <div className="mb-10">
-            <p className="text-2xl text-blue-600 font-semibold uppercase mt-10 mb-5">
+            <p className="font-bold text-blue-600 w-fit text-2xl border-b-2 border-blue-600 uppercase mt-10 mb-5">
                 Sản phẩm tương tự
             </p>
 

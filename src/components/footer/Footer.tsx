@@ -12,12 +12,16 @@ const Footer = () => {
         <div className="footer py-4 text-white">
             <div className="container px-3">
 
-                <div className="text-center text-xl mb-5">
-                    TM SOFTWARE là giải pháp công nghệ cho doanh nghiệp của bạn , giá trị cốt lõi TIN TƯỞNG - UY TÍN - TẬN TÂM
+                <div className="text-center text-2xl font-semibold !font-sans">
+                    TM SOFTWARE là giải pháp công nghệ cho doanh nghiệp của bạn 
                 </div>
+                <div className="text-center text-2xl mb-5 font-semibold !font-sans">
+                Giá trị cốt lõi TIN TƯỞNG - UY TÍN - TẬN TÂM
+                </div>
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
                     <div className="col-span-1 ">
-                        <p className='ft '>
+                        <p className='ft font-semibold'>
                             THÔNG TIN LIÊN HỆ
                         </p>
 
@@ -115,7 +119,7 @@ const Footer = () => {
 
                     </div>
                     <div className="col-span-1 inline-block mx-auto">
-                        <p className='ft'>
+                        <p className='ft font-semibold'>
                             FANPAGE
                         </p>
                         <iframe

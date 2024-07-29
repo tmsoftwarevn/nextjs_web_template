@@ -7,13 +7,20 @@ import {
   Input,
   Modal,
   Row,
+  Select,
   Upload,
   message,
 } from "antd";
 import { convertSlug } from "@/util/convertSlug";
+import SelectNganh from "./SelectNganh";
 
 const AddNganh = (props) => {
-  const { isModalAddNganh, setIsModalAddNganh, fetchAllNganh } = props;
+  const {
+    isModalAddNganh,
+    setIsModalAddNganh,
+    fetchAllNganh,
+    listCustomParent,
+  } = props;
 
   const [form] = Form.useForm();
   const [fileName, setFileName] = useState("");
@@ -58,27 +65,28 @@ const AddNganh = (props) => {
     setIsModalAddNganh(false);
   };
 
+  
   const onFinish = (values) => {
-    const { name } = values;
+    const { name, parentId } = values;
 
     const slug = convertSlug(name);
 
     // title, meta_des ko sử dụng
 
-    CallAddNganh(name, slug, fileName, 't', 't');
+    CallAddNganh(name, slug, parentId, fileName, "t", "t");
 
     form.resetFields();
     setIsModalAddNganh(false);
     setFileList([]);
   };
 
-  const CallAddNganh = async (name, slug, image, title, meta_des) => {
+  const CallAddNganh = async (name, slug, parentId, image, title, meta_des) => {
     const res = await fetch(`${process.env.URL_BACKEND}/api/v1/nganh`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ name, slug, image, title, meta_des }),
+      body: JSON.stringify({ name, slug, parentId, image, title, meta_des }),
     });
 
     const result = await res.json();
@@ -122,6 +130,23 @@ const AddNganh = (props) => {
               </Form.Item>
             </Col>
 
+            <Col span={24}>
+              <Form.Item
+                labelCol={{ span: 24 }}
+                label="Ngành cha "
+                name="parentId"
+                
+              >
+                <Select
+                  style={{
+                    width: "100%",
+                  }}
+                  placeholder="Ngành cha"
+                  options={listCustomParent}
+                />
+
+              </Form.Item>
+            </Col>
             {/* <Col span={24} >
               <Form.Item
                 labelCol={{ span: 24 }}
