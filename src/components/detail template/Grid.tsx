@@ -19,9 +19,9 @@ const Grid = ({detail, nameNganh} : any) => {
                 <div className="grid-col-1">
 
                     <BasicBreadcrumbs nameNganh ={nameNganh}/>
-                    <div className="mt-2 text-2xl md:text-3xl font-semibold text-blue-600">
+                    <h1 className="mt-2 text-2xl md:text-3xl font-semibold text-blue-600">
                        {detail.title}
-                    </div>
+                    </h1>
 
                     <div className="rounded-full w-fit cursor-pointer hover:bg-blue-700 mt-5 text-white font-semibold bg-blue-600 px-10 py-2"
                      onClick={() =>  window.open(detail.link, '_blank', 'noopener,noreferrer')}

@@ -42,13 +42,14 @@ const Card = ({ item }: Props) => {
                     <div className="chitiet w-[140px] grid gap-3">
                         <div
                             onClick={() => handleViewWeb(item.link)}
-                            className=" rounded-[5px] w-full flex  mx-auto items-center text-center justify-center font-semibold text-white xs:text-sm px-4 py-2 bg-yellow-500 text-md">
+                            className="chitiet-btn rounded-[5px] w-full flex  mx-auto items-center text-center justify-center font-semibold text-white xs:text-sm px-4 py-2 bg-yellow-500 text-md">
                             <IoMdEye className="text-xl font-bold" />
                             <div className="">Xem thử</div>
+
                         </div>
                         <div
                             onClick={() => handleViewDetail(item.slug)}
-                            className="rounded-[5px] w-full mx-auto flex items-center text-center justify-center font-semibold text-white xs:text-sm px-4 py-2 bg-blue-500 text-md">
+                            className="chitiet-btn rounded-[5px] w-full mx-auto flex items-center text-center justify-center font-semibold text-white xs:text-sm px-4 py-2 bg-blue-500 text-md">
                             <IoMdAdd className="text-xl font-bold" />
                             <div className="">Xem chi tiết</div>
                         </div>

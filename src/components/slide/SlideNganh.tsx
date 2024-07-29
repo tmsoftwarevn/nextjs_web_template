@@ -73,12 +73,12 @@ const SlideNganh: React.FC<ListNganh> = ({ list }) => {
 
     return (
         <>
-            <div className="text-2xl cursor-pointer font-semibold text-blue-600 text-center mb-10"
+            <h2 className="text-2xl cursor-pointer font-semibold text-blue-600 text-center mb-10"
                 onClick={() => route.push('/giao-dien?nganh=all&page=1')}
             >
                 KHO GIAO DIỆN CỦA TM SOFTWARE
 
-            </div>
+            </h2>
 
             <div className="relative">
                 <Slider ref={sliderRef} {...settings}>

@@ -123,11 +123,11 @@ const Footer = () => {
                             width="340"
                             height="153"
                             style={{ border: 'none', overflow: 'hidden' }}
-                            scrolling="no"
-                            frameBorder="0"
+
                             allowFullScreen={true}
                             allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
-                        </iframe>                    </div>
+                        </iframe>
+                    </div>
                 </div>
             </div>
         </div>
