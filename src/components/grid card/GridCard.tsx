@@ -8,7 +8,7 @@ import Box from "@mui/material/Box";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-import { Pagination } from "antd";
+import { Flex, Pagination } from "antd";
 
 type Template = {
     name: string;
@@ -22,16 +22,19 @@ const GridCard = ({ slugNganh }: any) => {
     const searchParams = useSearchParams();
 
     const [listTemplate, setListTemplate] = useState<Template[]>([]);
-    const [page, setPage] = useState<any>(1);
+    const [page, setPage] = useState<any>('1');
 
-    const limit = 12; //12
+    const limitt = 5;    //12
 
-    const [total, setTotal] = useState<any>(1);
+    const [totall, setTotal] = useState(1);
 
     //e: React.ChangeEvent<unknown>
     const handlePaginate = (page: number, g: number) => {
 
-        route.push(`/giao-dien?page=${page}&nganh=${searchParams.get("nganh")}`);
+        if (searchParams.get("nganh"))
+            route.push(`/giao-dien?page=${page}&nganh=${searchParams.get("nganh")}`);
+        route.push(`/giao-dien?page=${page}&nganh=all`);
+
     };
 
     useEffect(() => {
@@ -48,11 +51,11 @@ const GridCard = ({ slugNganh }: any) => {
 
     }, [slugNganh, page]);
 
-    //console.log('dddd', slugNganh);
-
     const callTemplateById = async (id: number) => {
         const res = await fetch(
-            `${process.env.URL_BACKEND}/api/v1/paginate_template_byidnganh/${id}?page=${page}&limit=${limit}`
+            // `${process.env.URL_BACKEND}/api/v1/paginate_template_byidnganh/${id}?page=${page}&limit=${limit}`
+            `${process.env.URL_BACKEND}/api/v1/listchildnganh/${id}?page=${page}&limit=${limitt}`
+
         );
 
         const result = await res.json();
@@ -66,17 +69,19 @@ const GridCard = ({ slugNganh }: any) => {
 
     const callAllTemplate = async () => {
         const res = await fetch(
-            `${process.env.URL_BACKEND}/api/v1/paginate_template?page=${page}&limit=${limit}`
+            `${process.env.URL_BACKEND}/api/v1/paginate_template?page=${page}&limit=${limitt}`
         );
         const result = await res.json();
 
         if (result.EC === 1) {
             let d = result.list;
             //d = d.concat(d);
+
             setListTemplate(d);
             setTotal(result.data.totalPage);
         }
     };
+    console.log('llllll', page, limitt, totall)
 
     return (
         <>
@@ -84,13 +89,13 @@ const GridCard = ({ slugNganh }: any) => {
                 {listTemplate &&
                     listTemplate.map((item, idx) => {
                         return (
-                            <>
-                                <div key={`dsk${idx}`} className="col-span-1 shadow-gray-400 card shadow-md">
 
-                                    <Card item={item} />
+                            <div key={`d4sk${idx}`} className="col-span-1 shadow-gray-400 card shadow-md">
 
-                                </div>
-                            </>
+                                <Card item={item} />
+
+                            </div>
+
                         );
                     })}
             </div>
@@ -100,10 +105,12 @@ const GridCard = ({ slugNganh }: any) => {
             >
                 <Stack spacing={2}>
                     <Pagination
-                        current={page}
-                        pageSize={limit}
+                        // current={+page}
+                        // pageSize={limitt}
+                        current={1}
+                        pageSize={5}
                         onChange={(p: number, g: number) => handlePaginate(p, g)}
-                        total={+total}
+                        total={15}
                     />
                 </Stack>
             </Box>

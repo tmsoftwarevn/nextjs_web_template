@@ -12,15 +12,49 @@ import {
   message,
 } from "antd";
 import { useEffect, useRef, useState } from "react";
-
 import { Upload } from "antd";
-
 import { Editor } from "@tinymce/tinymce-react";
 import TextArea from "antd/es/input/TextArea";
 import { convertSlug } from "@/util/convertSlug";
 
+const options = [
+  {
+    label: <span>manager</span>,
+    title: "manager",
+    options: [
+      {
+        label: <span>Jack</span>,
+        value: "Jack",
+      },
+      {
+        label: <span>Lucy</span>,
+        value: "Lucy",
+      },
+    ],
+  },
+  {
+    label: <span>engineer</span>,
+    title: "engineer",
+    options: [
+      {
+        label: <span>Chloe</span>,
+        value: "Chloe",
+      },
+      {
+        label: <span>Lucas</span>,
+        value: "Lucas",
+      },
+    ],
+  },
+];
+
 const AddTemplate = (props) => {
-  const { isModalAddTemplate, setIsModalAddTemplate, fetchAllTemplate,selectNganh } = props;
+  const {
+    isModalAddTemplate,
+    setIsModalAddTemplate,
+    fetchAllTemplate,
+    selectNganh,
+  } = props;
   //////////////////
   const refEditor = useRef(null);
   const filePickerCallback = function (cb, value, meta) {
@@ -52,6 +86,7 @@ const AddTemplate = (props) => {
   let [noidung, setNoidung] = useState("");
   const [fileList, setFileList] = useState([]);
   const [image, setFileName] = useState("");
+  const [optionSelect, setOptionSelect] = useState(options);
 
   const onChange = ({ fileList: newFileList }) => {
     setFileList(newFileList);
@@ -87,10 +122,10 @@ const AddTemplate = (props) => {
     }
   };
 
-  useEffect(() =>{
+  useEffect(() => {
     setNoidung("");
-  },[isModalAddTemplate])
-  
+  }, [isModalAddTemplate]);
+
   const onFinish = async (values) => {
     const { name, link, id_nganh, title, meta_des } = values;
     const slug = convertSlug(name);
@@ -110,7 +145,7 @@ const AddTemplate = (props) => {
         meta_des,
         image,
         description,
-        slug
+        slug,
       }),
     });
 
@@ -124,7 +159,6 @@ const AddTemplate = (props) => {
       message.success("Thêm thất bại");
       handleCancel();
     }
-  
   };
 
   const handleCancel = () => {
@@ -132,6 +166,40 @@ const AddTemplate = (props) => {
     form.resetFields();
     setFileList([]);
     setNoidung("");
+  };
+
+  // custom select
+  useEffect(() => {
+    callAllNganh_parentId();
+  }, []);
+
+  const callAllNganh_parentId = async () => {
+    const res = await fetch(`${process.env.URL_BACKEND}/api/v1/nganh_parent`);
+    const result = await res.json();
+    if (result.EC === 1) {
+      custom_list(result.data);
+    }
+  };
+
+  const custom_list = (list) => {
+    let arr = [];
+    list.map((item, idx) => {
+      let a = {};
+      a.label = <span>{item.name}</span>;
+      a.title = item.name;
+      let b = [];
+      if (item?.children && item?.children?.length > 0) {
+        item.children.map((child) => {
+          b.push({
+            label: <span>{child.name}</span>,
+            value: child.id,
+          });
+        });
+      }
+      a.options = b;
+      arr.push(a);
+    });
+    setOptionSelect(arr);
   };
 
   return (
@@ -193,13 +261,15 @@ const AddTemplate = (props) => {
                   },
                 ]}
               >
-                <Select
+                {/* <Select
                   style={{
                     width: "100%",
                   }}
                   placeholder="Thuộc ngành"
                   options={selectNganh}
-                />
+                /> */}
+                <Select placeholder="Chọn ngành" options={optionSelect} />
+
               </Form.Item>
             </Col>
             <Col span={12}>

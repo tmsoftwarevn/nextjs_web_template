@@ -32,6 +32,7 @@ let settings = {
         },
     ],
 };
+
 const RelatedProduct = ({ detail }: any) => {
     //let arr = ['1', '2', '3', '4'];
     const [list, setList] = useState([]);

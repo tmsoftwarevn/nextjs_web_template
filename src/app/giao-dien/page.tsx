@@ -62,7 +62,9 @@ export default function Giaodien() {
     }
 
   }
+
   if (isLoading) return <LoadingCss />
+  
   return (
     <>
       <div className="bg-body py-5">

@@ -12,7 +12,6 @@ import {
   message,
 } from "antd";
 import { convertSlug } from "@/util/convertSlug";
-import SelectNganh from "./SelectNganh";
 
 const AddNganh = (props) => {
   const {
