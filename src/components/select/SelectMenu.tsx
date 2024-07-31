@@ -1,14 +1,9 @@
-import { Nganh } from "@/util/type";
-import { useSearchParams } from "next/navigation";
+import { data, Nganh } from "@/util/type";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Select from "react-select";
 
-const options = [
-  { value: "0", label: "Tất cả" },
-  { value: "chocolate", label: "Chocolate" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
+
 const customStyles = {
   singleValue: (provided: any) => ({
     ...provided,
@@ -34,12 +29,14 @@ const customStyles = {
 
 interface ListNganh {
   list: Nganh[];
+  handleSelectMenu(detail: data): void;
+  slugNganh: any
 }
 
-const SelectMenu: React.FC<ListNganh> = ({ list }) => {
+const SelectMenu: React.FC<ListNganh> = ({ list, handleSelectMenu, slugNganh }) => {
   const [selectedOption, setSelectedOption] = useState({ value: "0", label: "Tất cả" });
   const params = useSearchParams();
-
+  const route = useRouter();
   const [listMenu, setListMenu] = useState([{ value: '0', label: "Tất cả" }]);
 
   useEffect(() => {
@@ -47,6 +44,12 @@ const SelectMenu: React.FC<ListNganh> = ({ list }) => {
     setSelectedOption({ value: "0", label: "Tất cả" })
 
   }, [params.get("nganh")]);
+
+  useEffect(() =>{
+    if(params.get("c")){
+      console.log('cccccccc')
+    }
+  },[params.get("c")])
 
   const custom_idSelect = () => {
     let itemFind = list.find((item, idx) => item.slug === params.get("nganh"));
@@ -62,14 +65,19 @@ const SelectMenu: React.FC<ListNganh> = ({ list }) => {
     setListMenu(arr)
     setSelectedOption({ value: "0", label: "Tất cả" })
   };
-
+  
   const handleSelectMenuChildren = (value: any) => {
-    console.log('vvvvv', value)
+
+    if (+value.value === 0) {   // click tất cả
+      handleSelectMenu({ id: 0, name: slugNganh.name, idDetail: 0 })
+    }
+    else
+      handleSelectMenu({ id: 0, name: slugNganh.name, idDetail: value.value })
   }
 
   return (
     <div className="flex gap-4 items-center">
-      <div className="hidden sm:block font-semibold">Chọn ngành: </div>
+      <div className="hidden sm:block font-semibold text-blue-600">Chọn ngành: </div>
       <Select
 
         styles={customStyles}

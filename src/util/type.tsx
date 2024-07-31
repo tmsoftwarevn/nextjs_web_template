@@ -6,3 +6,9 @@ export interface Nganh {
     id: number;
     children: Nganh[];
 }
+
+export interface data {
+    id: number;
+    name: string;
+    idDetail: number;
+}

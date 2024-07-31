@@ -6,7 +6,8 @@ import { useEffect, useRef, useState } from "react";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 
 let settings = {
-    arrows: false,
+    autoplay: true,
+    arrows: true,
     infinite: true,
     speed: 500,
     slidesToShow: 4,
@@ -91,6 +92,7 @@ const RelatedProduct = ({ detail }: any) => {
                         <MdKeyboardArrowRight />
                     </div>
                 </button>
+
             </div>
         </div>
     );

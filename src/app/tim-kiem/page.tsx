@@ -17,7 +17,8 @@ export default function TimKiem() {
   }, []);
 
   const callAllNganh = async () => {
-    const res = await fetch(`${process.env.URL_BACKEND}/api/v1/nganh`);
+    // const res = await fetch(`${process.env.URL_BACKEND}/api/v1/nganh`);
+    const res = await fetch(`${process.env.URL_BACKEND}/api/v1/nganh_parent`);
     const result = await res.json();
     if (result.EC === 1) {
       setLoading(false)

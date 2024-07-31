@@ -1,0 +1,14 @@
+
+.css-brc{
+    position: relative;
+    &::before {
+        position: absolute;
+        content: '';
+        width: 45px;
+        height: 4px;
+        bottom: -10px;
+        left: 0;
+        background: #2980b9;
+        border-radius: 20px;
+    }
+}

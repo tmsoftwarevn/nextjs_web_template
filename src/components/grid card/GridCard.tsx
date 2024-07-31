@@ -8,7 +8,7 @@ import Box from "@mui/material/Box";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-import { Flex, Pagination } from "antd";
+import { Pagination } from "antd";
 
 type Template = {
     name: string;
@@ -24,7 +24,7 @@ const GridCard = ({ slugNganh }: any) => {
     const [listTemplate, setListTemplate] = useState<Template[]>([]);
     const [page, setPage] = useState<any>('1');
 
-    const limitt = 5;    //12
+    const limitt = 12;    //12
 
     const [totall, setTotal] = useState(1);
 
@@ -33,7 +33,8 @@ const GridCard = ({ slugNganh }: any) => {
 
         if (searchParams.get("nganh"))
             route.push(`/giao-dien?page=${page}&nganh=${searchParams.get("nganh")}`);
-        route.push(`/giao-dien?page=${page}&nganh=all`);
+        else
+            route.push(`/giao-dien?page=${page}&nganh=all`);
 
     };
 
@@ -45,15 +46,37 @@ const GridCard = ({ slugNganh }: any) => {
 
     useEffect(() => {
         //nếu click nganh
-        if (slugNganh.id && slugNganh.id != 0) {
-            callTemplateById(slugNganh.id);
+        if (slugNganh.id && slugNganh.id != 0) {    // ngành cha
+            callTemplateByIdParent(slugNganh.id);
         } else callAllTemplate();
+        if (slugNganh.idDetail && +slugNganh.idDetail !== 0) {      // ngành con
+            callTemplateByIdChild(slugNganh.idDetail);
+
+        }
 
     }, [slugNganh, page]);
 
-    const callTemplateById = async (id: number) => {
+
+
+    const callTemplateByIdChild = async (id: number) => {
+        // ko phân trang
         const res = await fetch(
-            // `${process.env.URL_BACKEND}/api/v1/paginate_template_byidnganh/${id}?page=${page}&limit=${limit}`
+            `${process.env.URL_BACKEND}/api/v1/paginate_template_byidnganh/${id}?page=1&limit=999`
+
+        );
+
+        const result = await res.json();
+
+        if (result.EC === 1) {
+            let d = result.list;
+            setListTemplate(d);
+            setTotal(result?.data?.total);
+
+        }
+    };
+
+    const callTemplateByIdParent = async (id: number) => {
+        const res = await fetch(
             `${process.env.URL_BACKEND}/api/v1/listchildnganh/${id}?page=${page}&limit=${limitt}`
 
         );
@@ -63,7 +86,8 @@ const GridCard = ({ slugNganh }: any) => {
         if (result.EC === 1) {
             let d = result.list;
             setListTemplate(d);
-            setTotal(result.data.totalPage);
+            setTotal(result?.data?.total);
+
         }
     };
 
@@ -78,10 +102,10 @@ const GridCard = ({ slugNganh }: any) => {
             //d = d.concat(d);
 
             setListTemplate(d);
-            setTotal(result.data.totalPage);
+            setTotal(result?.data?.total);
+
         }
     };
-    console.log('llllll', page, limitt, totall)
 
     return (
         <>
@@ -100,20 +124,24 @@ const GridCard = ({ slugNganh }: any) => {
                     })}
             </div>
 
-            <Box
-                sx={{ display: "flex", justifyContent: "center", marginTop: "40px" }}
-            >
-                <Stack spacing={2}>
-                    <Pagination
-                        // current={+page}
-                        // pageSize={limitt}
-                        current={1}
-                        pageSize={5}
-                        onChange={(p: number, g: number) => handlePaginate(p, g)}
-                        total={15}
-                    />
-                </Stack>
-            </Box>
+            {
+                slugNganh.idDetail && +slugNganh.idDetail !== 0 ?
+                    <> </>
+                    :
+                    <Box
+                        sx={{ display: "flex", justifyContent: "center", marginTop: "40px" }}
+                    >
+                        <Stack spacing={2}>
+                            <Pagination
+                                current={+page}
+                                pageSize={limitt}
+                                onChange={(p: number, g: number) => handlePaginate(p, g)}
+                                total={totall}
+
+                            />
+                        </Stack>
+                    </Box>
+            }
 
 
         </>
