@@ -21,8 +21,8 @@ export default function BasicBreadcrumbs({ nameNganh }: any) {
                 <Link className='xs:text-xs text-md hover:text-blue-600 uppercase text-gray-600' href={{
                     pathname: '/giao-dien',
                     query: {
-                        //    nganh: nameNganh.slug
-                        c: nameNganh.slug
+                        nganh: nameNganh.slug
+                        //c: nameNganh.slug
                     },
                 }}>
                     {nameNganh.name}

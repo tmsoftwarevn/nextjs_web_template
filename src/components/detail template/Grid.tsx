@@ -20,8 +20,11 @@ const Grid = ({ detail, nameNganh }: any) => {
                         width="0"
                         height="0"
                         sizes="100vw"
-                        alt="dưewe"
+
                         className="w-full h-auto"
+                       
+                        alt="carousel"
+                        priority
                     />
                 </div>
                 <div className="grid-col-1">

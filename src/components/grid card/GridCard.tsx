@@ -24,7 +24,7 @@ const GridCard = ({ slugNganh }: any) => {
     const [listTemplate, setListTemplate] = useState<Template[]>([]);
     const [page, setPage] = useState<any>('1');
 
-    const limitt = 12;    //12
+    const limitt = 16;    //16
 
     const [totall, setTotal] = useState(1);
 

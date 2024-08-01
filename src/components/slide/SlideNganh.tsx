@@ -10,6 +10,7 @@ import { Nganh } from "@/util/type";
 import { GoSearch } from "react-icons/go";
 
 let settings = {
+    autoplay: true,
     arrows: false,
     infinite: true,
     speed: 500,
@@ -104,7 +105,7 @@ const SlideNganh: React.FC<ListNganh> = ({ list }) => {
                     })}
                 </Slider>
 
-                <button className="arrow-left-tr" onClick={previous}>
+                {/* <button className="arrow-left-tr" onClick={previous}>
                     <div className="arrow-left-tr__icon">
                         <MdKeyboardArrowLeft />
                     </div>
@@ -113,7 +114,7 @@ const SlideNganh: React.FC<ListNganh> = ({ list }) => {
                     <div className="arrow-right-tr__icon">
                         <MdKeyboardArrowRight />
                     </div>
-                </button>
+                </button> */}
             </div>
 
             <div className="mt-10 inline-flex items-center rounded-[35px] p-[10px] pl-5 w-full bg-violet-100 h-10"

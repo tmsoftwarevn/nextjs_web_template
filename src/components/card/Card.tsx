@@ -49,7 +49,7 @@ const Card = ({ item }: Props) => {
                         </div>
                         <div
                             onClick={() => handleViewDetail(item.slug)}
-                            className="chitiet-btn rounded-[5px] w-full mx-auto flex items-center text-center justify-center font-semibold text-white xs:text-sm px-4 py-2 bg-blue-500 text-sm">
+                            className="chitiet-btn rounded-[5px] w-full mx-auto flex items-center text-center justify-center font-semibold text-white xs:text-sm px-4 py-2 bg-sky-400 text-sm">
                             <IoMdAdd className="text-xl font-bold" />
                             <div className="">Xem chi tiết</div>
                         </div>

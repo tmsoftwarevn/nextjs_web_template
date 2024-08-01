@@ -47,10 +47,11 @@ const Slug = ({ params }: Props) => {
 
     useEffect(() => {
         if (detail.id_nganh)
-            call_get_name_idNganh(detail.id_nganh);
+            call_get_name_idNganh(detail.id);
 
     }, [detail])
 
+    //console.log('id detail: ', detail)
     const call_get_name_idNganh = async (id: number) => {
         const res = await fetch(
             `${process.env.URL_BACKEND}/api/v1/name_nganh/${id}`
