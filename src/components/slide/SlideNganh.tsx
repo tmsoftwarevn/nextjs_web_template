@@ -75,7 +75,7 @@ const SlideNganh: React.FC<ListNganh> = ({ list }) => {
     return (
         <>
             <h2 className="text-2xl cursor-pointer font-semibold text-blue-600 text-center mb-10"
-                onClick={() => route.push('/giao-dien?page=1&nganh=all')}
+                onClick={() => route.push('/giao-dien?page=1')}
             >
                 TRANG CHỦ KHO GIAO DIỆN 
 
@@ -87,7 +87,8 @@ const SlideNganh: React.FC<ListNganh> = ({ list }) => {
                         return (
                             <div key={`spc${idx}`}>
                                 <div className="mr-5 cursor-pointer"
-                                    onClick={() => { route.push(`/giao-dien?page=1&nganh=${item.slug}`) }}
+                                //`/giao-dien?page=1&nganh=${item.slug}`
+                                    onClick={() => { route.push(`/${item.slug}`) }}
                                 >
                                     <Image
                                         src={`${process.env.URL_BACKEND}/images/${item.image}`}

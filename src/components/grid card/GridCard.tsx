@@ -5,7 +5,7 @@ import "../card/card.scss";
 
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { Pagination } from "antd";
@@ -20,21 +20,23 @@ type Template = {
 const GridCard = ({ slugNganh }: any) => {
     const route = useRouter();
     const searchParams = useSearchParams();
-
     const [listTemplate, setListTemplate] = useState<Template[]>([]);
     const [page, setPage] = useState<any>('1');
-
     const limitt = 16;    //16
-
     const [totall, setTotal] = useState(1);
+
+    const pathname = usePathname();
 
     //e: React.ChangeEvent<unknown>
     const handlePaginate = (page: number, g: number) => {
 
-        if (searchParams.get("nganh"))
-            route.push(`/giao-dien?page=${page}&nganh=${searchParams.get("nganh")}`);
-        else
-            route.push(`/giao-dien?page=${page}&nganh=all`);
+        // if (searchParams.get("nganh"))
+        //     route.push(`/giao-dien?page=${page}&nganh=${searchParams.get("nganh")}`);
+        // else
+        //     route.push(`/giao-dien?page=${page}&nganh=all`);
+        if (pathname === "/giao-dien")
+            route.push(`/giao-dien?page=${page}`);
+        else route.push(`${pathname}?page=${page}`);
 
     };
 

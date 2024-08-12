@@ -1,5 +1,5 @@
 import { data, Nganh } from "@/util/type";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Select from "react-select";
 
@@ -35,7 +35,7 @@ interface ListNganh {
 
 const SelectMenu: React.FC<ListNganh> = ({ list, handleSelectMenu, slugNganh }) => {
   const [selectedOption, setSelectedOption] = useState({ value: "0", label: "Tất cả" });
-  const params = useSearchParams();
+  const params = useParams();
   const route = useRouter();
   const [listMenu, setListMenu] = useState([{ value: '0', label: "Tất cả" }]);
 
@@ -43,16 +43,11 @@ const SelectMenu: React.FC<ListNganh> = ({ list, handleSelectMenu, slugNganh }) 
     custom_idSelect();
     setSelectedOption({ value: "0", label: "Tất cả" })
 
-  }, [params.get("nganh")]);
+  }, [params.slug]);
 
-  useEffect(() =>{
-    if(params.get("c")){
-      console.log('cccccccc')
-    }
-  },[params.get("c")])
 
   const custom_idSelect = () => {
-    let itemFind = list.find((item, idx) => item.slug === params.get("nganh"));
+    let itemFind = list.find((item, idx) => item.slug === params.slug);
     let arr = [{ value: '0', label: "Tất cả" }];
     if (itemFind && itemFind.id && itemFind?.children) {
       itemFind?.children.map((it, idxx) => {

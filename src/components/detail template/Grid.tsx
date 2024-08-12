@@ -8,7 +8,7 @@ const Grid = ({ detail, nameNganh }: any) => {
     return (
         <>
             <h2 className="text-2xl cursor-pointer font-semibold text-blue-600 text-center mb-10"
-                onClick={() => route.push('/giao-dien?nganh=all&page=1')}
+                onClick={() => route.push('/giao-dien?page=1')}
             >
                 TRANG CHỦ KHO GIAO DIỆN
             </h2>

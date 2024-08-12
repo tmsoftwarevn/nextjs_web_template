@@ -10,12 +10,6 @@ import Footer from "@/components/footer/Footer";
 import SelectMenu from "@/components/select/SelectMenu";
 
 
-// type data = {
-//   id: number;
-//   name: string;
-//   idDetail: number;
-// }
-
 export default function Giaodien() {
 
   const params = useSearchParams();
