@@ -69,7 +69,8 @@ const SelectMenu: React.FC<ListNganh> = ({ list, handleSelectMenu, slugNganh }) 
   const handleSelectMenuChildren = (value: any) => {
 
     if (+value.value === 0) {   // click tất cả
-      handleSelectMenu({ id: 0, name: slugNganh.name, idDetail: 0 })
+      // lỗi fix cho nay
+      handleSelectMenu({ id: slugNganh.id, name: slugNganh.name, idDetail: 0 })
     }
     else
       handleSelectMenu({ id: 0, name: slugNganh.name, idDetail: value.value })

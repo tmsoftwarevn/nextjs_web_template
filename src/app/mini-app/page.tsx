@@ -43,7 +43,7 @@ export default function Giaodien() {
     let itemFind = arr.find((item, idx) => item.slug == params.get('nganh'));
 
     // set slug, id cho grid card để hiển thị
-
+    
     if (itemFind && itemFind.id) {
       setSlugNganh({ id: itemFind.id, name: itemFind.name, idDetail: 0 })
     } else {
@@ -54,7 +54,7 @@ export default function Giaodien() {
 
   const handleSelectMenu = (detail: data) => {
     if (detail.id === 0 && detail.idDetail === 0) {
-
+      
       findIdNganh(list)
     } else
       setSlugNganh({ id: 0, name: detail.name, idDetail: detail.idDetail });
