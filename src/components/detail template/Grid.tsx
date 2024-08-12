@@ -30,8 +30,8 @@ const Grid = ({ detail, nameNganh }: any) => {
                 <div className="grid-col-1">
 
                     <BasicBreadcrumbs nameNganh={nameNganh} />
-                    <h1 className="mt-2 text-2xl md:text-3xl font-semibold text-blue-600">
-                        {detail.title}
+                    <h1 className="mt-2 text-2xl capitalize md:text-3xl font-semibold text-blue-600">
+                        {detail.name}
                     </h1>
 
                     <div className="rounded-full w-fit cursor-pointer hover:bg-blue-700 mt-5 text-white font-semibold bg-blue-600 px-10 py-2"

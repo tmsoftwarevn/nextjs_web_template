@@ -252,7 +252,6 @@ const QuanliNganh = () => {
       title: "Ngành cha",
       dataIndex: "parentId",
       key: "parentId",
-      ...getColumnSearchProps("parentId"),
       sorter: {
         compare: (a, b) => a.parentId - b.parentId,
       },

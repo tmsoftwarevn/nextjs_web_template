@@ -37,7 +37,7 @@ const Card = ({ item }: Props) => {
                     className="w-full h-auto"
                 />
 
-                <div className="text-center py-3 px-3 text-blue-600 leading-5 font-semibold">{item.name}</div>
+                <div className="text-center py-3 capitalize px-3 text-blue-600 leading-5 font-semibold">{item.name}</div>
                 <div className="card-hover ">
                     <div className="chitiet w-[140px] grid gap-3">
                         <div
