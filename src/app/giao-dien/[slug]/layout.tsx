@@ -22,7 +22,6 @@ export async function generateMetadata({ params }: Props) {
     };
   }
 
-
 }
 
 export default function RootLayout({

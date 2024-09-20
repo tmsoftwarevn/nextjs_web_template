@@ -50,11 +50,11 @@ const GridCard = ({ slugNganh }: any) => {
         //nếu click nganh
         if (slugNganh.id && slugNganh.id != 0) {    // ngành cha
             callTemplateByIdParent(slugNganh.id);
-        } else callAllTemplate();
-        if (slugNganh.idDetail && +slugNganh.idDetail !== 0) {      // ngành con
+        }
+        else if (slugNganh.idDetail && +slugNganh.idDetail !== 0) {      // ngành con
             callTemplateByIdChild(slugNganh.idDetail);
 
-        }
+        } else callAllTemplate();
 
     }, [slugNganh, page]);
 
